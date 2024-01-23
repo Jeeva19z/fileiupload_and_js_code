@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel File Upload and Display</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        #th{
+        display: none;
+        }
+        #phi{
+           display: none;
+           
+        }
+      
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            /* background-color:black ; */
+        }
+
+        input {
+            padding: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #excelContent {
+            margin-top: 20px;
+            text-align: left;
+            display: block;
+        }
+        #excelContent{
+            padding: 40px;
+            margin: 10px;
+            border: 5px solid lightslategrey;
+        }
+        .filechooese{
+            padding: 20px;
+            background-color: rgb(43, 192, 187);
+            margin-top: 10px;
+        }
+        #output{
+            padding: 40px;
+            margin: 10px;
+            border: 5px solid lightslategrey;
+        }
+        .flex-sperate{
+            margin-top: 15px;
+            margin-bottom: 15px;
+            display: grid;
+     grid-template-columns: 1fr 1fr 2fr;
+    
+           
+        }
+       
+        .page{
+            background-color: lightblue;
+             width: 100%;
+          
+        }
+        .footer{
+            margin-top:350px;
+           
+        }
+        .btn-coutrty{
+        width: 300px;
+        /* background-color: red; */
+        text-align: left !important;
+        
+      }
+      #open_country_list{
+        width: 100% !important;
+      }
+     
+    </style>
+</head>
+<body>
+
+   <p class="btn-coutrty"> <button id="open_country_list">Select Country</button></p>
+    <div class="country">
+        <div class="country_list">
+           
+    <button  id="thailand" >Thailand</button>
+    <button  id="philiphines" >Philippines</button>
+    
+       
+    
+        </div>
+    
+    </div>
+    
+    <script>
+
+        </script>
+    
+<!-- -------------------------------------------------THAILAND BELOW HTML --------------------------------  -->
+<div id="th">
+
+ <div class="page">
+    <h2>Automation Tool for TH Kana Staging</h2>
+   <div class="flex-sperate">
+       
+    <div class="section1">
+    <input class="filechooese"  type="file" id="fileInput" accept=".xlsx, .xls">
+  <br><br>
+
+
+    <button id="open_processFile" onclick="processFile()">Verify</button>
+    <br><br>
+    <div id="excelContent"></div>
+
+    </div>
+    <div class="section2">
+    <form>
+        
+        <label for="field2">eDM Name:</label><br/>
+        <input type="text" id="field2" name="field2" placeholder="Enter text">
+        <br>
+        <label for="field3">Subject:</label><br/>
+        <input type="text" id="field3" name="field3" placeholder="Enter text" >
+        <br>
+        <label for="field3">URL:</label><br/>
+        <input type="text" id="field4" name="field4" placeholder="Enter text">
+        <br>
+        <!-- Button to add elements dynamically -->
+        <br><br>
+        <input type="button" name="button" id="button" onclick="a()" value="Add Element">
+        <button type="reset">Reset</button>
+
+        <!-- Container for dynamically added elements -->
+        <div  id="copyContainer">
+        </div>
+    </form>
+
+   </div>
+   <div class="section3">
+    
+    <!-- <div id="excelContent">
+        <p class="excel_content">TH-GCBIBCB1L2312111111111</p>
+        <p class="excel_content">TH-GCBIBCB1L2312222222222</p>
+        <p class="excel_content">TH-GCBIBCB1L2312333333333</p>
+        <p class="excel_content">TH-GCBIBCB1L2444444444444</p>
+      
+        
+    </div> -->
+    <div id="output"></div>
+</div>
+
+</div>
+
+<div class="footer">
+<p style="text-align: left;visibility: hidden;">dev @ 24</p>
+
+</div>
+</div>
+</div>
+<!-- -------------------------------------------------THAILAND ABOVE HTML --------------------------------  -->
+
+
+<!-- -------------------------------------------------PHILIPHINES BELOW HTML --------------------------------  -->
+<style>
+html {
+    background-color: #FFDCB6 !important;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    /* overflow: hidden;  */
+    /* background-color: red;  */
+}
+
+h2 {
+    color: #333;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #F4CE14;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: bold;
+    text-align: left;
+}
+
+input {
+    width: calc(100% - 16px);
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    width: calc(50% - 4px);
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#button {
+    width: calc(50% - 4px);
+    margin-left: 8px;
+}
+
+.copy {
+    border: 2px solid black;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: left;
+    max-height: 400px; 
+    overflow-y: scroll;
+}
+
+.result-container {
+    margin-bottom: 10px;
+}
+
+.full-dev {
+    display: grid;
+    background-color: #FFDCB6;
+    grid-template-columns: 1fr 2fr;
+}
+
+div#copyContainer {
+    background: #495E57;
+    color: white;
+    margin: 10px;
+}
+
+
+    </style>
+
+  
+<div id="phi">
+<div class="full-dev">
+    
+    <form>
+        <h2>Input Fields</h2>
+        <label for="field1">Input string:</label>
+        <input type="text" id="field1ph" name="field1" placeholder="Enter text" >
+        <label for="field2">Name:</label>
+        <input type="text" id="field2ph" name="field2" placeholder="Enter text">
+        <label for="field3">URL:</label>
+        <input type="text" id="field3ph" name="field3" placeholder="Enter text" >
+        <label for="field4">Subject:</label>
+        <input type="text" id="field4ph" name="field4" placeholder="Enter text" >
+        <button type="button" name="button" id="buttons1">Add Element</button><br><br>
+        <button type="reset">Reset</button>
+
+
+    </form>
+
+    <div class="copy" id="copyContainer1"></div>
+</div>
+
+</div>
+
+
+
+
+<!-- -------------------------------------------------PHILIPHINES ABOVE HTML --------------------------------  -->
+
+
+
+
+
+
+
+
+
+<!-- -------------------------------------------------THAILAND BELOW script --------------------------------  -->
+
+
+<!-- dont touch below script--------------------------------- -->
+
+    <script>
+        function processFile() {
+            // Get the file input element
+            const fileInput = document.getElementById('fileInput');
+
+            // Check if a file is selected
+            if (fileInput.files.length === 0) {
+                alert('Please select a file.');
+                return;
+            }
+
+            // Read the contents of the selected Excel file
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                // Get the content of the file
+                const fileContent = e.target.result;
+
+                // Use SheetJS to parse the Excel file
+                const workbook = XLSX.read(fileContent, { type: 'binary' });
+                const sheetName = workbook.SheetNames[0];
+                const sheet = workbook.Sheets[sheetName];
+
+                // Convert sheet data to JSON
+                const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+
+                // Display the JSON data on the webpage
+                displayExcelContent(jsonData);
+            };
+
+            // Read the file as binary data
+            reader.readAsBinaryString(file);
+        }
+
+        function displayExcelContent(data) {
+            // Get the container element
+            const excelContentContainer = document.getElementById('excelContent');
+
+            // Clear the previous content
+            excelContentContainer.innerHTML = '';
+
+            // Display the content as plain text
+            data.forEach(rowData => {
+    rowData.forEach(cellData => {
+        const cellContent = document.createElement('p');
+        cellContent.textContent = cellData;
+        cellContent.classList.add('excel_content'); // Add your desired class name
+        excelContentContainer.appendChild(cellContent);
+    });
+});
+
+        }
+    </script>
+
+
+
+ 
+<!-- dont touch above script--------------------------------- -->
+
+
+
+
+<script>
+   
+function a() {
+    var field2 = document.querySelectorAll("#field2")[0].value;
+    var field3 = document.querySelectorAll("#field3")[0].value;
+    var field4 = document.querySelectorAll("#field4")[0].value;
+
+    
+
+
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2); 
+    const day = ('0' + currentDate.getDate()).slice(-2); 
+    var result = "TH" + "-" + year + "-" + month + "-" + day  + " ";
+
+
+    var result_field2 =field2;
+    var result_field3 =field3;
+    var result_field4 =field4;
+
+
+
+var output = document.getElementById("output");
+
+
+    var get_excel_value = document.querySelectorAll(".excel_content");
+
+    var lenthfind_excel_content = get_excel_value.length;
+
+
+
+
+    for (var i = 1; i < lenthfind_excel_content; i++) {
+        var excel_value = get_excel_value[i].textContent;
+
+        console.log(`${result} ${ excel_value} ${field2}0${i}`);
+        console.log(`${field3}`);
+        console.log(`${field4}`);
+
+        const new_output_div =document.createElement("div");
+        const new_output_div1 =document.createElement("div");
+        const new_output_div2 =document.createElement("div");
+        const new_output_div3 =document.createElement("div");
+        var spaceadd = document.createElement("br");
+
+
+        new_output_div.textContent=result +" "+ excel_value + " " + field2+[i];
+        new_output_div1.textContent=field3
+        new_output_div2.textContent=field4
+        new_output_div3.style.margin="15px"
+
+
+
+         output.appendChild(new_output_div)
+         output.appendChild(new_output_div1)
+         output.appendChild(new_output_div2)
+         output.appendChild(new_output_div3)
+         output.appendChild(spaceadd);
+
+
+    
+        // output1.textContent=`${result} ${excel_value} ${field2}0${i}`;
+        // output2.textContent=`${field3}`;
+        // output3.textContent=`${field4}`;
+    
+      
+
+    }
+}
+
+a();
+
+
+
+   
+
+</script>
+
+<!-- ------------------------------------------------- PHILIPINES ABOVE --------------------------------  -->
+
+                                     <!-- ------------------ MID ----------------  -->
+
+
+<!-- ------------------------------------------------- PHILIPINES BELOW --------------------------------  -->
+
+
+<script>
+    // var clickCount = 0;
+
+    document.querySelector("#buttons1").addEventListener("click", function () {
+
+        var field1 = document.querySelectorAll("#field1ph")[0].value;
+        var field2 = document.querySelectorAll("#field2ph")[0].value;
+        var field3 = document.querySelectorAll("#field3ph")[0].value;
+        var field4 = document.querySelectorAll("#field4ph")[0].value;
+
+        const currentDate = new Date();
+const year = currentDate.getFullYear();
+const month = ('0' + (currentDate.getMonth() + 1)).slice(-2); 
+const day = ('0' + currentDate.getDate()).slice(-2); 
+
+        var cutvalue = field1;
+        var numTostring =field1.toString();
+
+        var getvalutwodig = numTostring.slice(-2);
+
+        var strinTonumber = parseFloat(getvalutwodig)
+        console.log(strinTonumber);
+
+        
+if(strinTonumber==0){
+
+    
+        var result = "PHGCB_" + year + month + day + " " + field1 + " " + field2 ;
+        run()
+}
+else{
+
+var result = field1 +"~EN"+ " "  ;
+var ckc=0;
+do{
+    
+        
+        run()
+       
+     
+}while(ckc==1)
+
+var result =  field1 +"~US" ;
+
+run()
+
+
+}
+
+
+      
+
+function run(){
+
+        var resultElement = document.createElement("div");
+        resultElement.textContent = result;
+
+        var space = document.createElement("div");
+        space.style.margin="10px"
+
+
+        var field3ResultElement = document.createElement("div");
+        field3ResultElement.textContent = field3;
+
+        var link = document.createElement("div");
+        link.textContent = field4;
+        var spaceadd = document.createElement("br");
+
+ 
+        document.getElementById("copyContainer1").appendChild(resultElement);
+        document.getElementById("copyContainer1").appendChild(field3ResultElement);
+        document.getElementById("copyContainer1").appendChild(link);
+        document.getElementById("copyContainer1").appendChild(spaceadd);
+        document.getElementById("copyContainer1").appendChild(space);
+}
+
+    })
+
+
+
+ 
+
+
+
+</script>
+
+<!-- ------------------------------------------------- PHILIPINES ABOVE --------------------------------  -->
+
+<style>
+      th{
+        display: none;
+        }
+        #phi{
+           display: none;
+           
+        }
+        #thailand {
+            background-color: #86A7FC;
+             width: 300px;
+            padding: 10px;
+            margin: 10px;
+            margin-left: 30px;
+            margin-top: 40px;
+            outline: none;
+            border: none;
+            
+            
+        }
+
+        #philiphines{
+            width: 300px;
+            padding: 10px;
+            margin: 10px;
+            margin-left: 30px;
+            background-color: #FF9843;
+        
+
+        }
+        #thailand:hover{
+          
+            background-color: #3468C0;
+        }
+        #philiphines:hover{
+          
+          background-color: #3468C0;
+      }
+
+        .country{
+            position: relative;
+
+        }
+        .country_list{
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            left: 0;
+            background-color: rgb(248, 3, 3,0.8);
+            height: 100vh;
+            width: 400px;
+            display: none;
+        }
+     
+    </style>
+   
+
+</script>
+
+
+<script>
+
+    document.getElementById("open_country_list").addEventListener("click",()=>{
+        document.getElementById("th").style.display="none"
+        document.getElementById("phi").style.display="none"
+
+        document.querySelector(".country_list").style.display="block";
+        document.getElementById("open_country_list").style.display="none";
+    });
+
+
+    var arr = ["#thailand", "#philiphines"];
+
+
+        for(let i=0;i<arr.length;i++)    
+    {
+        document.querySelector(arr[i]).addEventListener("click", () => {
+            var countryList = document.querySelector(".country_list");
+            if (countryList!==null) {
+                countryList.style.display = "none";
+                document.getElementById("open_country_list").style.display="block";
+               
+            }
+var checkvalu = arr[i]           
+console.log(checkvalu)
+var open_Page=arr[i].slice(1);
+
+
+
+
+console.log(open_Page)
+
+
+sel_page(open_Page);
+
+
+function sel_page(getingvalu_open_page){
+
+  let getvaluopPage = getingvalu_open_page;
+
+  if(getvaluopPage == "thailand"){
+
+    function getingvalu(){
+        document.getElementById("th").style.display="block"
+        document.getElementById("phi").style.display="none"
+
+
+
+        
+    }
+}
+
+else if(getvaluopPage == "philiphines"){
+
+    function getingvalu(){
+        document.getElementById("phi").style.display="block"
+        document.getElementById("th").style.display="none"
+
+
+
+
+        
+    }
+
+
+}
+
+
+getingvalu()
+
+}
+
+
+        });
+      
+    }
+</script>
+
+
+
+</body>
+</html>
+
